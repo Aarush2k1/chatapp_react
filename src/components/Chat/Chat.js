@@ -29,7 +29,8 @@ function Chat() {
       <div className="chat_header">
         <Avatar src={`https://avatars.dicebear.com/4.5/api/human/123.svg`} />
         <div className="chat_headerInfo">
-          <h3>{chatId}</h3>
+          {/* <h3>{chatName}</h3> */}
+          <h3>NAME</h3>
           <p>Last seen {new Date().toUTCString()}</p>
         </div>
         <div className="chat_headerRight">
