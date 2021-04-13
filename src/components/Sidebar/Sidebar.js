@@ -26,7 +26,7 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <div className="sidebar_header">
-        <Avatar src="https://avatars.dicebear.com/4.5/api/male/dt.svg" />
+        <Avatar src="./1.jpg" />
         <div className="sidebar_headerRight">
           <IconButton>
             <DonutLargeIcon />
