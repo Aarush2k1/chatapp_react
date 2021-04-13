@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import useStyles from "./styles";
 import { WhatsApp } from "@material-ui/icons";
-import { auth, provider } from "../../firebase";
+import { auth, provider } from "../../api/firebase";
 import { useStateValue } from "../../Provider/StateProvider";
 import { actionTypes } from "../../Provider/reducer";
 

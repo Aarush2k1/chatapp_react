@@ -6,7 +6,7 @@ import ChatIcon from "@material-ui/icons/Chat";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { SearchOutlined } from "@material-ui/icons";
 import SidebarChat from "./SidebarChat/SidebarChat";
-import db from "../../firebase";
+import db from "../../api/firebase";
 import { useStateValue } from "../../Provider/StateProvider";
 // import pic from "../../images/4.jpg";
 

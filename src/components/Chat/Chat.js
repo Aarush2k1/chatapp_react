@@ -5,7 +5,7 @@ import { AttachFile, MoreVert, SearchOutlined } from "@material-ui/icons";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import MicIcon from "@material-ui/icons/Mic";
 import { useParams } from "react-router";
-import db from "../../firebase";
+import db from "../../api/firebase";
 import { useStateValue } from "../../Provider/StateProvider";
 import firebase from "firebase";
 
