@@ -11,10 +11,25 @@ import {
   Link,
   Paper,
 } from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./styles";
+import { WhatsApp } from "@material-ui/icons";
+import { auth, provider } from "../../firebase";
+import { useStateValue } from "../../Provider/StateProvider";
+import { actionTypes } from "../../Provider/reducer";
 
 function Login() {
+  const [{}, dispatch] = useStateValue();
+  const signIn = () => {
+    auth
+      .signInWithPopup(provider)
+      .then((result) => {
+        dispatch({
+          type: actionTypes.SET_USER,
+          user: result.user,
+        });
+      })
+      .catch((error) => alert(error.message));
+  };
   const classes = useStyles();
   return (
     <Grid container component="main" className={classes.root}>
@@ -23,7 +38,7 @@ function Login() {
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
+            <WhatsApp fontSize="large" />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
@@ -68,7 +83,7 @@ function Login() {
               OR
             </Typography>
             <Button
-              type="submit"
+              onClick={signIn}
               fullWidth
               variant="contained"
               color="primary"
