@@ -64,6 +64,18 @@ function Login() {
             >
               Sign In
             </Button>
+            <Typography align="center" variant="h5">
+              OR
+            </Typography>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign In With Google
+            </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
