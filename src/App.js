@@ -1,37 +1,23 @@
 import React from "react";
-import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Sidebar from "./components/Sidebar/Sidebar";
-import Chat from "./components/Chat/Chat";
+import Dashboard from "./components/Dashboard";
+import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
-import { useStateValue } from "./Provider/StateProvider";
+import SignUp from "./components/Signup/Signup";
+import { AuthProvider } from "./components/Auth";
 
 const App = () => {
-  const [{ user }, dispatch] = useStateValue();
   return (
-    <div>
-      {!user ? (
-        <div>
-          <Login />
-        </div>
-      ) : (
-        <div className="app">
-          <div className="app_body">
-            <Router>
-              <Sidebar />
-              <Switch>
-                <Route path="/chats/:chatsId">
-                  <Chat />
-                </Route>
-                <Route path="/">
-                  <Chat />
-                </Route>
-              </Switch>
-            </Router>
-          </div>
-        </div>
-      )}
-    </div>
+    <AuthProvider>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={SignUp} />
+        </Switch>
+      </Router>
+    </AuthProvider>
   );
 };
 

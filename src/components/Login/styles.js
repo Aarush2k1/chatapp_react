@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import bgimage from "../../images/bg.jpg";
+import bgimage from "../../images/WhatsApp_Logo_4.png";
 
 export default makeStyles((theme) => ({
   root: {
@@ -7,7 +7,6 @@ export default makeStyles((theme) => ({
   },
 
   image: {
-    // backgroundImage: "url(https://source.unsplash.com/random)",
     backgroundImage: "url(" + bgimage + ")",
     backgroundRepeat: "no-repeat",
     backgroundColor:
@@ -28,7 +27,7 @@ export default makeStyles((theme) => ({
   avatar: {
     margin: theme.spacing(1),
     padding: "30px",
-    backgroundColor: theme.palette.success.main,
+    backgroundColor: "grey",
   },
   form: {
     width: "100%", // Fix IE 11 issue.

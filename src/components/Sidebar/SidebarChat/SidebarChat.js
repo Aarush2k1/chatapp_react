@@ -1,10 +1,11 @@
 import { Avatar } from "@material-ui/core";
 import React from "react";
 import { Link } from "react-router-dom";
-import db from "../../../api/firebase";
+import firebaseConfig from "../../../api/firebase";
 import "./SidebarChat.css";
 
 function SidebarChat({ id, name, addNewChat }) {
+  const db = firebaseConfig.firestore();
   // const [seed, setSeed] = useState("");
   // useEffect(() => {
   //   setSeed(Math.floor(Math.random() * 500));

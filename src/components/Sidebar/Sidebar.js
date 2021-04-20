@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Sidebar.css";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import { Avatar, IconButton, MenuItem, Menu } from "@material-ui/core";
@@ -6,9 +6,9 @@ import ChatIcon from "@material-ui/icons/Chat";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { SearchOutlined } from "@material-ui/icons";
 import SidebarChat from "./SidebarChat/SidebarChat";
-import db from "../../api/firebase";
-import { useStateValue } from "../../Provider/StateProvider";
-// import pic from "../../images/4.jpg";
+// import { useStateValue } from "../../Provider/StateProvider";
+import firebaseConfig from "../../api/firebase";
+import { AuthContext } from "../Auth";
 
 const options = [
   "New Group",
@@ -21,8 +21,10 @@ const options = [
 ];
 
 function Sidebar() {
-  const [{ user }, dispatch] = useStateValue();
+  const { user } = useContext(AuthContext);
+  // const [{ user }, dispatch] = useStateValue();
   const [chats, setChats] = useState([]);
+  const db = firebaseConfig.firestore();
   useEffect(() => {
     const unsubscribe = db.collection("chats").onSnapshot((snapshot) =>
       setChats(

@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Chat.css";
 import { Avatar, IconButton } from "@material-ui/core";
 import { AttachFile, MoreVert, SearchOutlined } from "@material-ui/icons";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import MicIcon from "@material-ui/icons/Mic";
 import { useParams } from "react-router";
-import db from "../../api/firebase";
-import { useStateValue } from "../../Provider/StateProvider";
+// import { useStateValue } from "../../Provider/StateProvider";
 import firebase from "firebase";
+import { AuthContext } from "../Auth";
+import firebaseConfig from "../../api/firebase";
 
 function Chat() {
   const [input, setInput] = useState("");
   const { chatsId } = useParams();
-  const [{ user }, dispatch] = useStateValue();
+  // const [{ user }, dispatch] = useStateValue();
+  const { user } = useContext(AuthContext);
+  const db = firebaseConfig.firestore();
   const [chatName, setChatName] = useState("");
   const [msgs, setMsgs] = useState([]);
   useEffect(() => {
