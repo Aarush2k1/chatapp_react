@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Redirect } from "react-router-dom";
 import {
   Button,
@@ -16,36 +16,19 @@ import InputOutlined from "@material-ui/icons/Input";
 import useStyles from "./styles";
 import firebaseConfig from "../../api/firebase.js";
 import { AuthContext } from "../Auth";
-import { useStateValue } from "../../Provider/StateProvider";
-import { actionTypes } from "../../Provider/reducer";
-import provider from "../../api/firebase";
 
 const Login = () => {
-  const [{}, dispatch] = useStateValue();
-  const signIn = () => {
-    firebaseConfig
-      .auth()
-      .signInWithPopup(provider)
-      .then((result) => {
-        dispatch({
-          type: actionTypes.SET_USER,
-          user: result.user,
-        });
-      })
-      .catch((error) => alert(error.message));
-  };
   const classes = useStyles();
-  const [authData, setAuthData] = useState(null);
-  const setReceivedData = (data) => setAuthData(data);
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = e.target.elements;
     try {
       firebaseConfig
         .auth()
-        .signInWithEmailAndPassword(email.value, password.value)
-        .then(setReceivedData);
-      console.log(authData);
+        .signInWithEmailAndPassword(email.value, password.value);
+      // .then((result) => {
+      //   console.log(email.value);
+      // });
     } catch (error) {
       alert(error);
     }

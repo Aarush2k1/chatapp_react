@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import "./Sidebar.css";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import { Avatar, IconButton, MenuItem, Menu } from "@material-ui/core";
@@ -6,38 +6,14 @@ import ChatIcon from "@material-ui/icons/Chat";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { SearchOutlined } from "@material-ui/icons";
 import SidebarChat from "./SidebarChat/SidebarChat";
-// import { useStateValue } from "../../Provider/StateProvider";
-import firebaseConfig from "../../api/firebase";
+// import firebaseConfig from "../../api/firebase";
 import { AuthContext } from "../Auth";
-
-const options = [
-  "New Group",
-  "Create a Room",
-  "Profile",
-  "Archived",
-  "Starred",
-  "Settings",
-  "LogOut",
-];
+import image from "../../images/4.jpg";
+import firebaseConfig from "../../api/firebase";
 
 function Sidebar() {
   const { user } = useContext(AuthContext);
-  // const [{ user }, dispatch] = useStateValue();
-  const [chats, setChats] = useState([]);
-  const db = firebaseConfig.firestore();
-  useEffect(() => {
-    const unsubscribe = db.collection("chats").onSnapshot((snapshot) =>
-      setChats(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          data: doc.data(),
-        }))
-      )
-    );
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  console.log(user);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -52,7 +28,7 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <div className="sidebar_header">
-        <Avatar src={user?.photoURL} />
+        <Avatar src={image} />
         <div className="sidebar_headerRight">
           <IconButton>
             <DonutLargeIcon />
@@ -74,22 +50,12 @@ function Sidebar() {
             keepMounted
             open={open}
             onClose={handleClose}
-            // PaperProps={{
-            //   style: {
-            //     maxHeight: 40 * 4.5,
-            //     width: "20ch",
-            //   },
-            // }}
           >
-            {options.map((option) => (
-              <MenuItem
-                key={option}
-                selected={option === "Pyxis"}
-                onClick={handleClose}
-              >
-                {option}
-              </MenuItem>
-            ))}
+            <MenuItem onClick={handleClose}>Create a Room</MenuItem>
+            <MenuItem onClick={handleClose}>Settings</MenuItem>
+            <MenuItem onClick={() => firebaseConfig.auth().signOut()}>
+              Logout
+            </MenuItem>
           </Menu>
         </div>
       </div>
@@ -101,9 +67,9 @@ function Sidebar() {
       </div>
       <div className="sidebar_chats">
         <SidebarChat addNewChat />
-        {chats.map((chat) => (
+        {/* {chats.map((chat) => (
           <SidebarChat key={chat.id} id={chat.id} name={chat.data.name} />
-        ))}
+        ))} */}
       </div>
     </div>
   );

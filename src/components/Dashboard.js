@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 import { AuthContext } from "./Auth";
-import firebaseConfig from "../api/firebase";
 import Sidebar from "./Sidebar/Sidebar";
 import Chat from "./Chat/Chat";
+import "./dash.css";
 
 const Dashboard = () => {
   const { currentUser } = useContext(AuthContext);
@@ -11,20 +11,11 @@ const Dashboard = () => {
     return <Redirect to="/" />;
   }
   return (
-    <div>
-      <h1>Welcome</h1>
-      {/* <Router>
+    <div className="app">
+      <div className="app_body">
         <Sidebar />
-        <Switch>
-          <Route path="/chats/:chatID">
-            <Chat />
-          </Route>
-          <Route path="/">
-            <Chat />
-          </Route>
-        </Switch>
-      </Router> */}
-      <button onClick={() => firebaseConfig.auth().signOut()}>Sign out</button>
+        <Chat />
+      </div>
     </div>
   );
 };
