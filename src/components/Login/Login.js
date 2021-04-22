@@ -19,19 +19,24 @@ import { AuthContext } from "../Auth";
 
 const Login = () => {
   const classes = useStyles();
+  const inputRef = () => {};
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = e.target.elements;
-    try {
-      firebaseConfig
-        .auth()
-        .signInWithEmailAndPassword(email.value, password.value);
-      // .then((result) => {
-      //   console.log(email.value);
-      // });
-    } catch (error) {
-      alert(error);
-    }
+    firebaseConfig
+      .auth()
+      .signInWithEmailAndPassword(email.value, password.value)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error.code);
+        if (error.code === "auth/wrong-password") {
+          alert("Wrong Password");
+        } else if (error.code === "auth/invalid-email") {
+          alert("Invalid Email");
+        }
+      });
   };
   const { currentUser } = useContext(AuthContext);
   if (currentUser) {
@@ -66,6 +71,7 @@ const Login = () => {
               margin="normal"
               required
               fullWidth
+              inputRef={inputRef}
               name="password"
               label="Password"
               type="password"

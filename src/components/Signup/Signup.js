@@ -24,7 +24,10 @@ const SignUp = () => {
     try {
       firebaseConfig
         .auth()
-        .createUserWithEmailAndPassword(email.value, password.value);
+        .createUserWithEmailAndPassword(email.value, password.value)
+        .then((result) => {
+          console.log(result);
+        });
       setCurrentUser(true);
     } catch (error) {
       alert(error);

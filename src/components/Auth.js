@@ -1,3 +1,4 @@
+import { CircularProgress } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import firebaseConfig from "../api/firebase";
 
@@ -9,11 +10,12 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     firebaseConfig.auth().onAuthStateChanged((user) => {
       setCurrentUser(user);
+      console.log(user);
       setLoading(false);
     });
   }, []);
   if (loading) {
-    return <p>Loading...</p>;
+    return <CircularProgress />;
   }
   return (
     <AuthContext.Provider value={{ currentUser }}>

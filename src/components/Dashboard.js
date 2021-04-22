@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Redirect, Route, Router, Switch } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { AuthContext } from "./Auth";
 import Sidebar from "./Sidebar/Sidebar";
 import Chat from "./Chat/Chat";
